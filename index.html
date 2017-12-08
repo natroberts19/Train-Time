@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
@@ -19,33 +18,34 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                    <span id="title">Train Time Scheduling Application</span>
+                <span id="title">Train Scheduling Application</span>
                 <div class="panel panel-default">
-                                        <!-- Default panel contents -->
+                    <!-- Default panel contents -->
                     <div class="panel-heading" id="style">Current Train Schedule</div>
 
                     <!-- Table -->
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Employee Name</th>
-                                <th>Role</th>
-                                <th>Start Date</th>
-                                <th>Months Worked</th>
-                                <th>Monthly Rate ($)</th>
-                                <th>Total Billed ($)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="name-display">Mark Miller</td>
-                                <td id="role-display">Developer</td>
-                                <td id="date-display">12/11/11</td>
-                                <td id="months-display">3</td>
-                                <td id="rate-display">5000</td>
-                                <td id="bill-display">3000</td>
-                            </tr>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Train Name</th>
+                                    <th>Destination</th>
+                                    <th>Frequency (min)</th>
+                                    <th>Next Arrival</th>
+                                    <th>Minutes Away</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="name-display">Mark Miller</td>
+                                    <td id="dest-display">Developer</td>
+                                    <td id="freq-display">12/11/11</td>
+                                    <td id="next-display">3</td>
+                                    <td id="mins-display">5000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,32 +56,32 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" id="style">Add Train</div>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Employee Name:</span>
+                        <span class="input-group-addon" id="basic-addon1">Train Name:</span>
                         <input type="text" class="form-control" id="name-input" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Role:</span>
-                        <input type="text" class="form-control" id="role-input" aria-describedby="basic-addon1">
+                        <span class="input-group-addon" id="basic-addon1">Destination:</span>
+                        <input type="text" class="form-control" id="role-input" placeholder="City or City Code" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Start Date:</span>
-                        <input type="text" class="form-control" id="date-input" placeholder="DD/MM/YY-ex. 21/01/89" aria-describedby="basic-addon1">
+                        <span class="input-group-addon" id="basic-addon1">First Train Time:</span>
+                        <input type="text" class="form-control" id="date-input" placeholder="HH:MM (In Military Time)" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Monthly Rate:</span>
-                        <input type="text" class="form-control" id="rate-input" aria-describedby="basic-addon1">
+                        <span class="input-group-addon" id="basic-addon1">Frequency:</span>
+                        <input type="text" class="form-control" id="rate-input" placeholder="(In Minutes)" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group" id="submit-button">
                         <button type="button" class="btn btn-default">Submit</button>
                     </div>
 
                 </div>
+            </div>
         </div>
-    </div>
 
-    <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="employee.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="assets/javascript/train.js"></script>
 </body>
 
 </html>
