@@ -25,7 +25,7 @@
 
                     <!-- Table -->
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="train-table">
                             <thead>
                                 <tr>
                                     <th>Train Name</th>
@@ -37,11 +37,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td id="name-display">Mark Miller</td>
-                                    <td id="dest-display">Developer</td>
-                                    <td id="freq-display">12/11/11</td>
-                                    <td id="next-display">3</td>
-                                    <td id="mins-display">5000</td>
+                                    <td id="name-display">Choo Choo</td>
+                                    <td id="dest-display">Orlando</td>
+                                    <td id="freq-display">120</td>
+                                    <td id="next-display">13:00</td>
+                                    <td id="mins-display">50</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -61,15 +61,15 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Destination:</span>
-                        <input type="text" class="form-control" id="role-input" placeholder="City or City Code" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="dest-input" placeholder="City or City Code" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">First Train Time:</span>
-                        <input type="text" class="form-control" id="date-input" placeholder="HH:MM (In Military Time)" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="first-time-input" placeholder="HH:mm (In Military Time)" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Frequency:</span>
-                        <input type="text" class="form-control" id="rate-input" placeholder="(In Minutes)" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="freq-input" placeholder="(In Minutes)" aria-describedby="basic-addon1">
                     </div>
                     <div class="input-group" id="submit-button">
                         <button type="button" class="btn btn-default">Submit</button>
@@ -79,8 +79,9 @@
             </div>
         </div>
 
-        <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script>
         <script type="text/javascript" src="assets/javascript/train.js"></script>
 </body>
 
