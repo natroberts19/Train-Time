@@ -38,7 +38,7 @@ var config = {
     console.log("First Train Time: ", first);
     console.log("Frequency: ", freq);
 
-    // Creates a local "temporary" object for holding input data:
+    // Creates a local "temporary" object for holding user input data. Prepares it for push.
     var newTrain = {
       name: name,
       dest: dest,
@@ -93,20 +93,16 @@ var config = {
                 var diffTime = moment().diff(moment(trainFirstConversion), "minutes");
                 console.log("Time Difference: ", diffTime);
         // c. Then, deal with the intervals between trains. Use the Modulus operator to calc the remainder of the time difference divided by frequency.
-        var remainder = diffTime % trainFreq;
+                var remainder = diffTime % trainFreq;
         // d. Subtract the remainder from the frequency to get the # of minutes until next train arrives.
-        var timeToTrain = trainFreq - remainder;
-        console.log("Minutes Away: " + timeToTrain);
+                var timeToTrain = trainFreq - remainder;
+                console.log("Minutes Away: " + timeToTrain);
         // e. Finally, format and add the time until next train arrives.
-        // ** This should display AM or PM!
-        var nextTrain = moment().add(timeToTrain, "minutes").format("h:mm a");
-        console.log("Next Arrival Time: ", nextTrain);
-
+        // Use the "a" to get AM/PM and remove one "h" to lose the leading zero.
+                var nextTrain = moment().add(timeToTrain, "minutes").format("h:mm a");
+                console.log("Next Arrival Time: ", nextTrain);
 
 // 5. Add each train's data into the HTML table.
-    // $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
-    // trainFree + "</td><td>" + trainNextPretty + "</td><td>" + trainMinutes + "</td><td>");
-
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
     trainFreq + "</td><td>" + nextTrain + "</td><td>" + timeToTrain + "</td><td>");
   });
