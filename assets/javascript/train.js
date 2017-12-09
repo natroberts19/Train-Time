@@ -10,6 +10,31 @@ var config = {
 
   firebase.initializeApp(config);
 
+// 2. Set up user sign-in with Github login.
+//  a. Request the client and token from GitHub. (done)
+//  b. Add the client and token to Firebase project. (done)
+//  c. Copy/paste the code snippet from Firebase. (see below)
+// **Not working **
+  var provider = new firebase.auth.GithubAuthProvider();
+  
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+      var token = result.credential.accessToken;
+      console.log("Token: ", token);
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+  
   // Create a new variable to reference the database.
   var database = firebase.database();
 
