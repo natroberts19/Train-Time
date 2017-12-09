@@ -1,3 +1,4 @@
+// 1. Create and set up the connection to Firebase using the config function received after setting up the train-time database on Firebase:
 var config = {
     apiKey: "AIzaSyDjiFek3szYG5vKxfua9mSPRuswBnRkSK8",
     authDomain: "train-time-40a20.firebaseapp.com",
@@ -9,11 +10,10 @@ var config = {
 
   firebase.initializeApp(config);
 
-  // Create a variable to reference the database
+  // Create a new variable to reference the database.
   var database = firebase.database();
 
-  // Initial Variables
-  // Note remember to create these same variables in Firebase!
+  // Initial Variables:
   var name = "";
   var dest = "";
   var freq = "";
@@ -21,14 +21,13 @@ var config = {
   var next = "";
   var mins = "";
   
-
-  // Submit Button changes what is stored in firebase
+// 2. Create the on-click function that triggers the Submit of new user inputs. This function sends the inputs to Firebase using .push.
   $("#submit-button").on("click", function () {
 
-    // Prevent the page from refreshing
+    // Prevents the page from refreshing.
     event.preventDefault();
 
-    // Get inputs
+    // Gets the inputs from the form:
     name = $("#name-input").val().trim();
     dest = $("#dest-input").val().trim();
     first = $("#first-time-input").val().trim();
@@ -39,7 +38,7 @@ var config = {
     console.log("First Train Time: ", first);
     console.log("Frequency: ", freq);
 
-    // Creates local "temporary" object for holding input data
+    // Creates a local "temporary" object for holding input data:
     var newTrain = {
       name: name,
       dest: dest,
@@ -47,64 +46,67 @@ var config = {
       freq: freq
     };
 
-    // Push data to Firebase 
+    // Push the data to Firebase:
     database.ref().push(newTrain);
+
+    // Clear all the text boxes after user clicks Submit:
+     name = $("#name-input").val("");
+     dest = $("#dest-input").val("");
+     first = $("#first-time-input").val("");
+     freq = $("#freq-input").val("");
   });
 
+// 3. Create Firebase event for adding new trains to the database as multiple records. Need to use childSnapshot. 
   // // Firebase is always watching for changes to the data.
-  // // When changes occurs it will print them to console and html. This is pulling the Child data which is represented by the emp id
+  // // When changes occurs it will print them to console and html. This is pulling the Child data which is represented by the new train id number in Firebase.
   database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
-  // Print the initial data to the console.
+    // Print the initial data to the console.
             console.log("child log: ", childSnapshot.val());       
 
-  // Log the value of the various properties
+    // Log the value of the various properties
             console.log(childSnapshot.val().name);
             console.log(childSnapshot.val().dest);
             console.log(childSnapshot.val().first);
             console.log(childSnapshot.val().freq);
 
-  // Store everything in a new variable
+    // Store everything in a new variable
       var currentTrain = childSnapshot.val();
           var trainName = currentTrain.name;
           var trainDest = currentTrain.dest;
           var trainFirst = currentTrain.first;
           var trainFreq = currentTrain.freq;
 
-          console.log(trainName);
+          console.log("Train Name: ", trainName);
+          console.log("Train Destination: ", trainDest);
+          console.log("First Train Time: ", trainFirst);
+          console.log("Train Frequency: ", trainFreq);
+      
+// 4. Calculate when the next train will arrive relative to the current time ("system time").
+    // (First Train time is entered by user in 24 hr. military time format - will need to be converted before using in calcs.)
+        // a. Convert the entered military time of the First Train and the Current Time into the same format.
+                var trainFirstConversion = moment(trainFirst, "hh:mm a").subtract(1, "years");
+                console.log("First Train Time Conversion: ", trainFirstConversion);
+                var currentTime = moment();
+                console.log("Current Time: ", moment(currentTime).format("hh:mm a"));
+        // b. Current Time - First Train = Time Difference 
+                var diffTime = moment().diff(moment(trainFirstConversion), "minutes");
+                console.log("Time Difference: ", diffTime);
+        // c. Then, deal with the intervals between trains. Use the Modulus operator to calc the remainder of the time difference divided by frequency.
+        var remainder = diffTime % trainFreq;
+        // d. Subtract the remainder from the frequency to get the # of minutes until next train arrives.
+        var timeToTrain = trainFreq - remainder;
+        console.log("Minutes Away: " + timeToTrain);
+        // e. Finally, format and add the time until next train arrives.
+        // ** This should display AM or PM!
+        var nextTrain = moment().add(timeToTrain, "minutes").format("h:mm a");
+        console.log("Next Arrival Time: ", nextTrain);
 
-      // Clears all the text boxes
-      name = $("#name-input").val("");
-      dest = $("#dest-input").val("");
-      first = $("#first-time-input").val("");
-      freq = $("#freq-input").val("");
 
-    
-    // Calculate when the next train will arrive relative to the current time ("system/UNIX time").
-    // First Train time is entered by user in 24 hr. military time format.
-        // 1. Convert the entered time of the First Train and the Current Time into seconds.
-        // 2. Convert Train Frequency to seconds.
-        // 3. Current Time (in seconds) - First Train (in seconds) = Total time 
-        // 4. Have to factor in the intervals????
+// 5. Add each train's data into the HTML table.
+    // $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
+    // trainFree + "</td><td>" + trainNextPretty + "</td><td>" + trainMinutes + "</td><td>");
 
-    //   var trainMinutes = "";
-    //   var timeFormat = "hh:mm";
-    
-    // //   var convertedDate = moment(trainFirst, timeFormat);
-    // console.log(moment("13:00", 'HH:mm').format('hh:mm a'));
-    // //   var totalMonths = moment(convertedDate).diff(moment(), "months");
-    // //   var totalBilled = totalMonths * empRate;
-
-    //  // Change the HTML
-    //  $("train-table" > "tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" + trainFreq + "</td><td>");
+    $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
+    trainFreq + "</td><td>" + nextTrain + "</td><td>" + timeToTrain + "</td><td>");
   });
-
-
-   
-
-
-
-  //           // If any errors are experienced, log them to console.
-          // }, function(errorObject) {
-          //   console.log("The read failed: " + errorObject.code);
-          
