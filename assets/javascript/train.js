@@ -10,31 +10,6 @@ var config = {
 
 firebase.initializeApp(config);
 
-// 2. Set up user sign-in with Github login.
-//  a. Request the client and token from GitHub. (done)
-//  b. Add the client and token to Firebase project. (done)
-//  c. Copy/paste the code snippet from Firebase. (see below)
-// **Not working yet ==> **
-var provider = new firebase.auth.GithubAuthProvider();
-
-firebase.auth().signInWithPopup(provider).then(function (result) {
-  // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-  var token = result.credential.accessToken;
-  console.log("Token: ", token);
-  // The signed-in user info.
-  var user = result.user;
-  // ...
-}).catch(function (error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-});
-
 // Create a new variable to reference the database.
 var database = firebase.database();
 
@@ -151,3 +126,78 @@ function tableclick(e) {
 }
 document.getElementById('train-table').addEventListener('click', tableclick, false);
 
+// 2. BONUS: Set up user sign-in with email/pw login.
+    //  a. From the CDN, include the individual Firebase-auth script link after the firebase-app link. (done)
+    //  b. Copy/paste the code snippets from Firebase. (done)
+    //  c. Incorporate into on-click events for the Register and Login buttons.
+    // **Not working yet ==> **
+
+    var email = "";
+    var password = "";
+
+    $("#register-button").on("click", function () {
+      
+        // Prevents the page from refreshing.
+        event.preventDefault();
+      
+        // Gets the inputs from the form:
+        email = $("#register-email").val().trim();
+        password = $("#register-password").val().trim();
+        console.log("Email: ", email);
+        console.log("Password: ", password);
+      
+        // Creates a local "temporary" object for holding user input data. Prepares it for push.
+        var newUser = {
+          tstamp: firebase.database.ServerValue.TIMESTAMP,
+          email: email,
+          password: password,
+        };
+      
+        console.log("New Registered User: ", newUser);
+        // Push the data to Firebase:
+        database.ref().push(newUser);
+        
+        // Create a new account:
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        })
+
+        // Sign-in with existing account:
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        })
+
+        // Sign-out a user:
+        firebase.auth().signOut().then(function() {
+          // Sign-out successful.
+        }).catch(function(error) {
+          // An error happened.
+        })
+
+        email = $("#register-email").val("");
+        password = $("#register-password").val("");
+
+      });
+
+      database.ref().on("child_added", function (childSnapshot, prevChildKey) {
+        
+          // Print the initial data to the console.
+          console.log("child log: ", childSnapshot.val());
+        
+          // Log the value of the various properties
+          console.log("Email: ", childSnapshot.val().email);
+          console.log("Password: ", childSnapshot.val().password);
+        
+          // Store everything in a new variable
+          var currentUser = childSnapshot.val();
+          var userEmail = currentUser.email;
+          var userPassword = currentUser.password;
+
+          $("#welcome").append("Welcome, " + userEmail);
+      });
