@@ -66,7 +66,6 @@ var config = {
     // Creates a local "temporary" object for holding user input data. Prepares it for push.
     var newTrain = {
       tstamp: firebase.database.ServerValue.TIMESTAMP,
-      // Tying to convert to regular time ==> tstamp: moment.unix(firebase.database.ServerValue.TIMESTAMP).format("YYYY-MM-DD HH:mm"),
       name: name,
       dest: dest,
       first: first,
@@ -130,12 +129,24 @@ var config = {
                 var nextTrain = moment().add(timeToTrain, "minutes").format("h:mm a");
                 console.log("Next Arrival Time: ", nextTrain);
 
+// 6. Add option to delete a train (row) from the table:
+
+
+
 // 5. Add each train's data into the HTML table.
 
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
-    trainFreq + "</td><td>" + nextTrain + "</td><td>" + timeToTrain + "</td><td>");
+    trainFreq + "</td><td>" + nextTrain + "</td><td>" + timeToTrain + "</td><td><button class='delRow'> x </button><tr><td>");
 
-// 6. Refresh the table data once loaded:
+    $("#train-table").on('click', 'input.delRow', function() {
+      $(this).parents('tr').remove();  
+      console.log(this);
+    });
+
+
+
+
+// 7. Refresh the table data once loaded:
     // $( "#train-table" ).load( "../javascript/assets/index.html", function() {
     //   console.log( "Load was performed." );
     // });
