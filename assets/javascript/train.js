@@ -11,10 +11,10 @@ var config = {
   firebase.initializeApp(config);
 
 // 2. Set up user sign-in with Github login.
-//  a. Request the client and token from GitHub. (done)
-//  b. Add the client and token to Firebase project. (done)
-//  c. Copy/paste the code snippet from Firebase. (see below)
-// **Not working yet**
+    //  a. Request the client and token from GitHub. (done)
+    //  b. Add the client and token to Firebase project. (done)
+    //  c. Copy/paste the code snippet from Firebase. (see below)
+    // **Not working yet ==> **
   var provider = new firebase.auth.GithubAuthProvider();
   
     firebase.auth().signInWithPopup(provider).then(function(result) {
@@ -44,12 +44,7 @@ var config = {
   var freq = "";
   var first = "";
   var next = "";
-  var mins = "";
-  // var timestamp = firebase.database.ServerValue.TIMESTAMP;
-  // console.log("Timestamp: ", timestamp);
-  // var timestampConvert = moment();
-  // console.log ("Timestamp Converted: ", moment.unix(timestamp).format("YYYY-MM-DD HH:mm"));
-  
+  var mins = "";  
   
 // 2. Create the on-click function that triggers the Submit of new user inputs. This function sends the inputs to Firebase using .push.
   $("#submit-button").on("click", function () {
@@ -70,8 +65,8 @@ var config = {
 
     // Creates a local "temporary" object for holding user input data. Prepares it for push.
     var newTrain = {
-      timestamp: firebase.database.ServerValue.TIMESTAMP,
-      // timestamp: moment.unix(firebase.database.ServerValue.TIMESTAMP).format("YYYY-MM-DD HH:mm"),
+      tstamp: firebase.database.ServerValue.TIMESTAMP,
+      // Tying to convert to regular time ==> tstamp: moment.unix(firebase.database.ServerValue.TIMESTAMP).format("YYYY-MM-DD HH:mm"),
       name: name,
       dest: dest,
       first: first,
@@ -136,6 +131,13 @@ var config = {
                 console.log("Next Arrival Time: ", nextTrain);
 
 // 5. Add each train's data into the HTML table.
+
     $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
     trainFreq + "</td><td>" + nextTrain + "</td><td>" + timeToTrain + "</td><td>");
+
+// 6. Refresh the table data once loaded:
+    // $( "#train-table" ).load( "../javascript/assets/index.html", function() {
+    //   console.log( "Load was performed." );
+    // });
+
   });
