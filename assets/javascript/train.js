@@ -111,7 +111,7 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
 
 });
 
-// BONUS: Add option to delete a train (row) from the table. I found this solution snippet on Stack. It deletes locally ONLY.
+// ==> BONUS: Add option to delete a train (row) from the table. I found this solution snippet on Stack. It deletes locally ONLY.
 // https://stackoverflow.com/questions/13241005/add-delete-row-from-a-table
 function deleteRow(row) {
   document.getElementById('train-table').deleteRow(row);
@@ -126,11 +126,12 @@ function tableclick(e) {
 }
 document.getElementById('train-table').addEventListener('click', tableclick, false);
 
-// 2. BONUS: Set up user sign-in with email/pw login.
+// ==> BONUS: Set up user sign-in with email/pw login.
     //  a. From the CDN, include the individual Firebase-auth script link after the firebase-app link. (done)
+    //  b. Choose the Sign-in methods in the Authentication section of the Firebase database. (done)
     //  b. Copy/paste the code snippets from Firebase. (done)
-    //  c. Incorporate into on-click events for the Register and Login buttons.
-    // **Not working yet ==> **
+    //  c. Incorporate into on-click events for the Register (done) and Login buttons.
+    // **Not working fully yet ==> although new users registrations do show up in the Authentication section of the Firebase db.**
 
     var email = "";
     var password = "";
@@ -180,6 +181,7 @@ document.getElementById('train-table').addEventListener('click', tableclick, fal
           // An error happened.
         })
 
+        // Clear the input fields
         email = $("#register-email").val("");
         password = $("#register-password").val("");
 
@@ -199,5 +201,5 @@ document.getElementById('train-table').addEventListener('click', tableclick, fal
           var userEmail = currentUser.email;
           var userPassword = currentUser.password;
 
-          $("#welcome").append("Welcome, " + userEmail);
+          // $("#welcome").append("Welcome, " + userEmail);
       });
