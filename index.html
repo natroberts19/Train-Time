@@ -12,23 +12,6 @@
 </head>
 
 <body>
-    <div id="dialog-register" title="Register new user">
-        <form>
-            <fieldset>
-                <label for="email">Email</label>
-                <input type="text" name="email" id="register-email" class="text-box" />
-                <label for="password">Password</label>
-                <input type="text" name="password" id="register-password" value="" class="text-box" />
-                <p id="welcome"></p>
-            </fieldset>
-        </form>
-        <div id="button-style">
-        <button id="register-button">Register</button>
-        <button id="login-button">Login</button>
-        <button id="logout-button">Logout</button>
-        </div>
-    </div>
-
     <div class="jumbotron"></div>
     <div class="container">
         <div class="row">
@@ -53,11 +36,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td id="name-display">Choo Choo 1</td>
-                                    <td id="dest-display">Jacksonville</td>
-                                    <td id="freq-display">15</td>
-                                    <td id="next-display">n/a</td>
-                                    <td id="mins-display">n/a</td>
+                                    <td id="name-display"></td>
+                                    <td id="dest-display"></td>
+                                    <td id="freq-display"></td>
+                                    <td id="next-display"></td>
+                                    <td id="mins-display"></td>
                                     <td>
                                         <input type="button" class="delRow" value="Delete">
                                     </td>
@@ -98,7 +81,6 @@
         </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-auth.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script>
     <script type="text/javascript" src="assets/javascript/train.js"></script>

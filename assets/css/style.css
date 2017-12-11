@@ -1,28 +1,7 @@
-#dialog-register {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    float: right;
-}
-
 #button-style {
     font-family: 'Lato', sans-serif;
     font-size: 14px;
     float: right;
-}
-
-#welcome {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    float: right;
-    color: rgb(163, 20, 20);
-}
-
-#new-signup {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    float: right;
-    font-style: bold;
-    border-radius: 8px;
 }
 
 #title {
