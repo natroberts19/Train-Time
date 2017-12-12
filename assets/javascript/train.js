@@ -105,7 +105,7 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
   console.log("Next Arrival Time: ", nextTrain);
 
   // 5. Add each train's data into the HTML table.
-  $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
+  $("#train-table > thead").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
     trainFreq + "</td><td>" + nextTrain + "</td><td>" + timeToTrain + "</td><td><button class='delRow' value='Delete'>Delete</button>");
 
 });
