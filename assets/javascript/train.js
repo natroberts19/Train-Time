@@ -106,13 +106,14 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
 
   // 5. Add each train's data into the HTML table.
 
-  $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
+  $("#train-table > thead").append("<tr><td>" + trainName + "</td><td>" + trainDest + "</td><td>" +
     trainFreq + "</td><td>" + nextTrain + "</td><td>" + timeToTrain + "</td><td><button class='delRow' value='Delete'>Delete</button>");
 
 });
 
-// ==> BONUS: Add option to delete a train (row) from the table. I found this solution snippet on Stack. It deletes locally ONLY.
+// ==> BONUS: Added option to delete a train (row) from the table. I found this solution snippet on Stack. It deletes locally ONLY.
 // https://stackoverflow.com/questions/13241005/add-delete-row-from-a-table
+// If I have time, try this: https://stackoverflow.com/questions/43990651/remove-object-from-firebase-using-javascript
 function deleteRow(row) {
   document.getElementById('train-table').deleteRow(row);
 }
