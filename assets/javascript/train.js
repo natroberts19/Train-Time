@@ -113,15 +113,29 @@ database.ref().on("child_added", function (childSnapshot, prevChildKey) {
 // ==> BONUS: Added option to delete a train (row) from the table. I found this solution snippet on Stack. It deletes locally ONLY.
 // https://stackoverflow.com/questions/13241005/add-delete-row-from-a-table
 // If I have time, try this: https://stackoverflow.com/questions/43990651/remove-object-from-firebase-using-javascript
-function deleteRow(row) {
-  document.getElementById('train-table').deleteRow(row);
-}
+// var rootRef = firebase.database().ref().child("Assets");
+// $("#train-table").on('click','.delRow', function(e){
+//     var $row = $(this).closest('tr'),
+//     var rowId = $row.data('id');
+//     rootRef.child(rowId).remove()
+//     //it should remove the firebase object in here
+//     rootRef.child(assetKey).remove()
+//     //after firebase confirmation, remove table row
+//     .then(function() {
+//       $row.remove();
+//     })
+//     //Catch errors
+//     .catch(function(error) {
+//       console.log('ERROR');
+//     });  
+// });
 
-function tableclick(e) {
-  if (!e)
-    e = window.event;
-  if (e.target.value == "Delete")
-    deleteRow(e.target.parentNode.parentNode.rowIndex);
+// rootRef.on("child_changed", snap => {
 
-}
-document.getElementById('train-table').addEventListener('click', tableclick, false);
+//   var assetKey = snap.child("id").val();
+//   var name = snap.child("name").val();
+//   var dest = snap.child("dest").val();
+//   var first = snap.child("first").val();
+//   var freq = snap.child("freq").val();
+
+// });
